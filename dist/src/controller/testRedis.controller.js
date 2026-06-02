@@ -1,2 +1,2 @@
-import { connectRedis } from "../config/redis.js";
+export {};
 //# sourceMappingURL=testRedis.controller.js.map

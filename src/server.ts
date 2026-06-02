@@ -1,5 +1,7 @@
 import express, { type Request, type Response } from 'express'
 import { connectRedis, redisClient } from './config/redis.js';
+import { emailQueue } from './queues/email.queue.js';
+import emailRoutes from './routes/email.route.js'
 
 const app = express();
 app.use(express.json());
@@ -46,6 +48,7 @@ app.get('/jobs',async(req:Request,res:Response)=>{
         0,
         -1
     );
+    
     res.send(jobs)
 });
 
@@ -62,6 +65,11 @@ app.get('/process-job', async(req:Request,res:Response)=>{
 
     res.send('Job Processed')
 })
+
+
+
+// ============= Routes ==========
+app.use('/api/queue',emailRoutes)
 
 async function startServer() {
 
