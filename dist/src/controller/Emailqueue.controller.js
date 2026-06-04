@@ -6,6 +6,8 @@ export const emailJob = async (req, res) => {
     const job = await emailQueue.add('send-email', {
         to: "test@gmail.com",
         subject: "Bullmq test",
+    }, {
+        removeOnComplete: true
     });
     res.json({
         id: job.id

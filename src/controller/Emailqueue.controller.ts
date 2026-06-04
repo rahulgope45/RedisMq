@@ -10,6 +10,9 @@ export const  emailJob = async(req:Request,res:Response)=>{
         {
             to: "test@gmail.com",
             subject: "Bullmq test",
+        },
+        {
+            removeOnComplete:true
         }
     );
     res.json({
