@@ -5,11 +5,19 @@ const worker = new Worker(
     async(job)=>{
         console.log('Processing Job', job.id);
         console.log('Data',job.data);
+        console.log(`Attempt: ${job.attemptsMade +1}`)
 
         // ==== Simmulating Email Sending ====
         await new Promise((resolve)=>
         setTimeout(resolve,3000)
         );
+
+        // ==== Simulating a error in Worker
+        // if(Math.random() > 0.1){
+        //     console.log("SMPT Error!");
+        //     throw new Error("Email provided failed");
+
+        // }
         console.log('Email Sent');
 
         return {
@@ -23,5 +31,14 @@ const worker = new Worker(
         }
     }
 );
+
+
+worker.on("completed",(job)=>{
+    console.log(`Job ${job.id} completed`)
+});
+
+worker.on("failed",(job,err)=>{
+    console.log(`Job ${job?.id} failed: ${err.message}`);
+})
 
 console.log('Worker Started');

@@ -7,6 +7,11 @@ export const emailJob = async (req, res) => {
         to: "test@gmail.com",
         subject: "Bullmq test",
     }, {
+        attempts: 3,
+        backoff: {
+            type: "fixed",
+            delay: 5000
+        },
         removeOnComplete: true
     });
     res.json({

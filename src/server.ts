@@ -3,6 +3,7 @@ import { connectRedis, redisClient } from './config/redis.js';
 import { emailQueue } from './queues/email.queue.js';
 import emailRoutes from './routes/email.route.js'
 
+
 const app = express();
 app.use(express.json());
 const PORT = 3000;

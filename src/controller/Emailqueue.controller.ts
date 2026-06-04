@@ -12,6 +12,11 @@ export const  emailJob = async(req:Request,res:Response)=>{
             subject: "Bullmq test",
         },
         {
+            attempts:3,
+            backoff: {
+              type: "fixed",
+              delay: 5000  
+            },
             removeOnComplete:true
         }
     );

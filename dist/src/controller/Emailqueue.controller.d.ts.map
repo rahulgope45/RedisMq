@@ -1,1 +1,1 @@
-{"version":3,"file":"Emailqueue.controller.d.ts","sourceRoot":"","sources":["../../../src/controller/Emailqueue.controller.ts"],"names":[],"mappings":"AAAA,OAAgB,EAAE,KAAK,OAAO,EAAE,KAAK,QAAQ,EAAE,MAAM,SAAS,CAAC;AAM/D,eAAO,MAAO,QAAQ,GAAS,KAAI,OAAO,EAAC,KAAI,QAAQ,kBActD,CAAC"}
+{"version":3,"file":"Emailqueue.controller.d.ts","sourceRoot":"","sources":["../../../src/controller/Emailqueue.controller.ts"],"names":[],"mappings":"AAAA,OAAgB,EAAE,KAAK,OAAO,EAAE,KAAK,QAAQ,EAAE,MAAM,SAAS,CAAC;AAM/D,eAAO,MAAO,QAAQ,GAAS,KAAI,OAAO,EAAC,KAAI,QAAQ,kBAmBtD,CAAC"}
