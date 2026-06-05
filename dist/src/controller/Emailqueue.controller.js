@@ -3,6 +3,7 @@ import { emailQueue } from '../queues/email.queue.js';
 import { redisClient } from '../config/redis.js';
 // ===== creating Job ====
 export const emailJob = async (req, res) => {
+    const delay = Number(req.query.delay);
     const job = await emailQueue.add('send-email', {
         to: "test@gmail.com",
         subject: "Bullmq test",
@@ -12,8 +13,10 @@ export const emailJob = async (req, res) => {
             type: "fixed",
             delay: 5000
         },
+        delay,
         removeOnComplete: true
     });
+    console.log(`Creating Job with delay ${delay}`);
     res.json({
         id: job.id
     });

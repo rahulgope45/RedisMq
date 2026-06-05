@@ -21,7 +21,7 @@ const worker = new Worker('emailQueue', async (job) => {
     }
 });
 worker.on("completed", (job) => {
-    console.log(`Job ${job.id} completed`);
+    console.log(`Job ${job.id} completed `, new Date().toLocaleTimeString());
 });
 worker.on("failed", (job, err) => {
     console.log(`Job ${job?.id} failed: ${err.message}`);
