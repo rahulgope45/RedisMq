@@ -9,6 +9,7 @@ export const emailJob = async (req: Request, res: Response) => {
     const scheduledTime = new Date(
         req.query.time as string
     );
+    const {to,subject} = req.body;
 
     const delay = scheduledTime.getTime() - Date.now();
 
@@ -27,14 +28,14 @@ export const emailJob = async (req: Request, res: Response) => {
     const job = await emailQueue.add(
         'send-email',
         {
-            to: "test@gmail.com",
-            subject: "Bullmq test",
+            to,
+            subject,
         },
         {
             attempts: 3,
             backoff: {
                 type: "fixed",
-                delay: 5000
+                delay: 0
             },
             delay,
             removeOnComplete: true

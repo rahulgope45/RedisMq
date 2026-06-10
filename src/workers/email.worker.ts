@@ -1,4 +1,5 @@
 import { Worker } from "bullmq";
+import { sendMail } from "../services/email.service.js";
 
 const worker = new Worker(
     'emailQueue',
@@ -18,7 +19,10 @@ const worker = new Worker(
         //     throw new Error("Email provided failed");
 
         // }
-        console.log('Email Sent');
+        await sendMail(
+            job.data.to,
+            job.data.subject
+        )
 
         return {
             success: true

@@ -1,4 +1,5 @@
 import { Worker } from "bullmq";
+import { sendMail } from "../services/email.service.js";
 const worker = new Worker('emailQueue', async (job) => {
     console.log('Processing Job', job.id);
     console.log('Data', job.data);
@@ -10,7 +11,7 @@ const worker = new Worker('emailQueue', async (job) => {
     //     console.log("SMPT Error!");
     //     throw new Error("Email provided failed");
     // }
-    console.log('Email Sent');
+    await sendMail(job.data.to, job.data.subject);
     return {
         success: true
     };
