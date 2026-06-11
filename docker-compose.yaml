@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  api:
+    build: .
+    command: node dist/src/server.js
+    env_file:
+    - .env
+
+  worker:
+    build: .
+    command: node dist/src/worker/email.worker.js
+    env_file:
+    - .env
