@@ -1,8 +1,6 @@
 import { Queue } from "bullmq";
+import { redisConnection } from "../config/bullmq.js";
 export const emailQueue = new Queue('emailQueue', {
-    connection: {
-        host: 'localhost',
-        port: 6379,
-    }
+    connection: redisConnection
 });
 //# sourceMappingURL=email.queue.js.map

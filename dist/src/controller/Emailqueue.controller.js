@@ -3,6 +3,9 @@ import { emailQueue } from '../queues/email.queue.js';
 import { redisClient } from '../config/redis.js';
 // ===== creating Job ====
 export const emailJob = async (req, res) => {
+    // settings for time zone
+    const timeStr = req.query.time;
+    const timeZone = req.query.tz; //For timezone like Asis/Kolakata
     const scheduledTime = new Date(req.query.time);
     const { to, subject } = req.body;
     const delay = scheduledTime.getTime() - Date.now();

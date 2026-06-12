@@ -4,7 +4,7 @@ import { emailQueue } from './queues/email.queue.js';
 import emailRoutes from './routes/email.route.js';
 const app = express();
 app.use(express.json());
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.get("/", (req, res) => {
     res.send("Server Started");
 });
@@ -44,8 +44,13 @@ app.get('/process-job', async (req, res) => {
 // ============= Routes ==========
 app.use('/api/queue', emailRoutes);
 async function startServer() {
-    await connectRedis();
-    app.listen(PORT, () => {
+    try {
+        await connectRedis();
+    }
+    catch (err) {
+        console.error('Redis connection failed:', err);
+    }
+    app.listen(Number(PORT), '0.0.0.0', () => {
         console.log(`Server started at:${PORT}`);
     });
 }

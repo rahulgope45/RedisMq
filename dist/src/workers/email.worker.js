@@ -1,5 +1,6 @@
 import { Worker } from "bullmq";
 import { sendMail } from "../services/email.service.js";
+import { redisConnection } from "../config/bullmq.js";
 const worker = new Worker('emailQueue', async (job) => {
     console.log('Processing Job', job.id);
     console.log('Data', job.data);
@@ -16,10 +17,7 @@ const worker = new Worker('emailQueue', async (job) => {
         success: true
     };
 }, {
-    connection: {
-        host: 'localhost',
-        port: 6379
-    }
+    connection: redisConnection
 });
 worker.on("completed", (job) => {
     console.log(`Job ${job.id} completed `, new Date().toLocaleTimeString());
