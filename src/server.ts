@@ -74,7 +74,11 @@ app.use('/api/queue',emailRoutes)
 
 async function startServer() {
 
-    await connectRedis();
+    try {
+        await connectRedis();
+    } catch (err) {
+        console.error('Redis connection failed:', err);
+    }
     
     app.listen(Number(PORT), '0.0.0.0', () => {
         console.log(`Server started at:${PORT}`);
