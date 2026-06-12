@@ -9,6 +9,8 @@ services:
         sync: false
       - key: REDIS_PORT
         sync: false
+      - key: REDIS_PASSWORD
+        sync: false
       - key: RESEND_API_KEY
         sync: false
       - key: RESEND_FROM_EMAIL
@@ -23,6 +25,8 @@ services:
       - key: REDIS_HOST
         sync: false
       - key: REDIS_PORT
+        sync: false
+      - key: REDIS_PASSWORD
         sync: false
       - key: RESEND_API_KEY
         sync: false
