@@ -1,3 +1,12 @@
+process.on('uncaughtException', (err) => {
+    console.error('UNCAUGHT:', err.message, err.stack);
+    process.exit(1);
+});
+process.on('unhandledRejection', (reason) => {
+    console.error('UNHANDLED REJECTION:', reason);
+    process.exit(1);
+});
+
 import express, { type Request, type Response } from 'express'
 import { connectRedis, redisClient } from './config/redis.js';
 import { emailQueue } from './queues/email.queue.js';
