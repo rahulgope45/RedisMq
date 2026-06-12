@@ -7,7 +7,8 @@ import { redisClient } from '../config/redis.js';
 export const emailJob = async (req: Request, res: Response) => {
 
     // settings for time zone
-    
+    const timeStr = req.query.time as string;
+    const timeZone = req.query.tz as string; //For timezone like Asis/Kolakata
 
     const scheduledTime = new Date(
         req.query.time as string
