@@ -5,8 +5,6 @@ services:
     dockerfilePath: ./Dockerfile
     startCommand: node dist/src/server.js
     envVars:
-      - key: PORT
-        value: 3000
       - key: REDIS_HOST
         sync: false
       - key: REDIS_PORT

@@ -76,7 +76,7 @@ async function startServer() {
 
     await connectRedis();
     
-    app.listen(PORT, () => {
+    app.listen(Number(PORT), '0.0.0.0', () => {
         console.log(`Server started at:${PORT}`);
     });
 };
