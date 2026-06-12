@@ -3,14 +3,14 @@ import { sendMail } from "../services/email.service.js";
 
 const worker = new Worker(
     'emailQueue',
-    async(job)=>{
+    async (job) => {
         console.log('Processing Job', job.id);
-        console.log('Data',job.data);
-        console.log(`Attempt: ${job.attemptsMade +1}`)
+        console.log('Data', job.data);
+        console.log(`Attempt: ${job.attemptsMade + 1}`)
 
         // ==== Simmulating Email Sending ====
-        await new Promise((resolve)=>
-        setTimeout(resolve,3000)
+        await new Promise((resolve) =>
+            setTimeout(resolve, 3000)
         );
 
         // ==== Simulating a error in Worker
@@ -29,19 +29,19 @@ const worker = new Worker(
         };
     },
     {
-        connection:{
-            host: 'localhost',
-            port: 6379
+        connection: {
+            host: process.env.REDIS_HOST || 'redis',
+            port: Number(process.env.REDIS_PORT) || 6379,
         }
     }
 );
 
 
-worker.on("completed",(job)=>{
-    console.log(`Job ${job.id} completed `,new Date().toLocaleTimeString())
+worker.on("completed", (job) => {
+    console.log(`Job ${job.id} completed `, new Date().toLocaleTimeString())
 });
 
-worker.on("failed",(job,err)=>{
+worker.on("failed", (job, err) => {
     console.log(`Job ${job?.id} failed: ${err.message}`);
 })
 

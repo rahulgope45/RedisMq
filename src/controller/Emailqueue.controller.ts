@@ -6,6 +6,9 @@ import { redisClient } from '../config/redis.js';
 // ===== creating Job ====
 export const emailJob = async (req: Request, res: Response) => {
 
+    // settings for time zone
+    
+
     const scheduledTime = new Date(
         req.query.time as string
     );
