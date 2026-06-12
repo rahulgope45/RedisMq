@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    startCommand: node dist/src/server.js
+    envVars:
+      - key: REDIS_HOST
+        sync: false
+      - key: REDIS_PORT
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM_EMAIL
+        sync: false
+
+  - type: worker
+    name: worker
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    startCommand: node dist/src/workers/email.worker.js
+    envVars:
+      - key: REDIS_HOST
+        sync: false
+      - key: REDIS_PORT
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM_EMAIL
+        sync: false
