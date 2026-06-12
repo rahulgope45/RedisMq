@@ -13,7 +13,7 @@ RUN npm run build
 
 #----- Production Stage ----
 
-FROM node:20-alpine AS runner
+FROM node:20-slim AS runner
 
 WORKDIR /app
 
