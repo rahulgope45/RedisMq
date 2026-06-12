@@ -17,6 +17,8 @@ export const emailJob = async (req: Request, res: Response) => {
 
     const delay = scheduledTime.getTime() - Date.now();
 
+    
+
 
     // ======safety check for user input =======
     if(delay < 0){
