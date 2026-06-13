@@ -1,21 +1,22 @@
-
 import { createClient } from "redis";
 
-const redisConnectionUrl = process.env.REDIS_URL;
+const redisConnectionUrl = process.env.REDIS_URL 
+  || (process.env.REDIS_HOST 
+      ? `redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT || 6379}`
+      : null);
 
 if (!redisConnectionUrl) {
-  console.error("CRITICAL ERROR: REDIS_URL environment variable is missing!");
+  console.error("CRITICAL: No Redis config found. Exiting.");
+  process.exit(1);  // now it actually stops and logs
 }
 
-export const redisClient = createClient({
-  url: redisConnectionUrl!
-});
+export const redisClient = createClient({ url: redisConnectionUrl });
 
-redisClient.on('error',(err)=>{
-  console.log('Redis error:',err)
+redisClient.on('error', (err) => {
+  console.log('Redis error:', err);
 });
 
 export async function connectRedis() {
-    await redisClient.connect();
-    console.log("Redis connected")
+  await redisClient.connect();
+  console.log("Redis connected");
 }
