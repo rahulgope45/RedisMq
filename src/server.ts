@@ -11,6 +11,8 @@ import express, { type Request, type Response } from 'express'
 import { connectRedis, redisClient } from './config/redis.js';
 import { emailQueue } from './queues/email.queue.js';
 import emailRoutes from './routes/email.route.js'
+import './workers/email.worker.js'
+
 
 
 const app = express();
@@ -92,6 +94,8 @@ async function startServer() {
     app.listen(Number(PORT), '0.0.0.0', () => {
         console.log(`Server started at:${PORT}`);
     });
+
+   
 };
 
 startServer();
